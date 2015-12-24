@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
+    <script src="/js/tinymce/tinymce.min.js"></script>
+      </head>
+      <body>
+        <textarea id="my_editor"></textarea>
+        <iframe id="form_target" name="form_target" style="display:none"></iframe>
+        <form id="my_form" action="/create/upload" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+          <input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
+        </form>
+
+        <script>
+	       tinymce.init({
+	        selector: '#my_editor',
+	        plugins: ["image"],
+	        file_browser_callback: function(field_name, url, type, win) {
+	            if(type=='image') $('#my_form input').click();
+	        }
+	       });
+	     </script>
+
+      </body>
+  </html>
